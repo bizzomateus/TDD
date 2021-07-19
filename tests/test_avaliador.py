@@ -24,7 +24,7 @@ class TestAvaliador(TestCase):
         self.assertEqual(max_esperado, avaliador.maior_lance)
         self.assertEqual(min_esperado, avaliador.menor_lance)
 
-    def test_avalia2(self):
+    def test_avalia_trocado(self):
         mat = Usuario('Mateus')
         re = Usuario('Regina')
 
