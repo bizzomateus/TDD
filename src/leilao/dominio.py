@@ -29,8 +29,8 @@ class Leilao:
 
 class Avaliador:
     def __init__(self):
-        self.maior_lance = sys.float_info.max
-        self.menor_lance = sys.float_info.min
+        self.maior_lance = sys.float_info.min
+        self.menor_lance = sys.float_info.max
 
     def avalia(self, leilao: Leilao):
         for lance in leilao.lances:
