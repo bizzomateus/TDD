@@ -3,7 +3,7 @@ from src.leilao.dominio import Avaliador, Usuario, Lance, Leilao
 
 class TestAvaliador(TestCase):
 
-    def test_avalia(self):
+    def test_avalia_crescente(self):
         '''
             deve avaliar lances adicionados em ordem crescente
         '''
@@ -27,7 +27,7 @@ class TestAvaliador(TestCase):
         self.assertEqual(max_esperado, avaliador.maior_lance)
         self.assertEqual(min_esperado, avaliador.menor_lance)
 
-    def test_avalia_trocado(self):
+    def test_avalia_decrescente(self):
         '''
             deve avaliar lances adicionados em ordem decrescente
         '''
@@ -51,4 +51,22 @@ class TestAvaliador(TestCase):
         self.assertEqual(max_esperado, avaliador.maior_lance)
         self.assertEqual(min_esperado, avaliador.menor_lance)
 
+    def test_avalia_mesmo_valor(self):
+        '''
+            deve retornar mesmo valor para maior e menor lance
+            quando só ouver um único lance
+        '''
+        valor_esperado = 1000.0
+
+        user = Usuario('Mat')
+        lance = Lance(user, valor_esperado)
+
+        leilao = Leilao('Carro')
+        leilao.lances.append(lance)
+
         
+        avaliador = Avaliador()
+        avaliador.avalia(leilao)
+
+        self.assertEqual(valor_esperado, avaliador.menor_lance)
+        self.assertEqual(valor_esperado, avaliador.maior_lance)
