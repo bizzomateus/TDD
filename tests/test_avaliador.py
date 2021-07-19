@@ -4,6 +4,9 @@ from src.leilao.dominio import Avaliador, Usuario, Lance, Leilao
 class TestAvaliador(TestCase):
 
     def test_avalia(self):
+        '''
+            deve avaliar lances adicionados em ordem crescente
+        '''
         mat = Usuario('Mateus')
         re = Usuario('Regina')
 
@@ -25,6 +28,9 @@ class TestAvaliador(TestCase):
         self.assertEqual(min_esperado, avaliador.menor_lance)
 
     def test_avalia_trocado(self):
+        '''
+            deve avaliar lances adicionados em ordem decrescente
+        '''
         mat = Usuario('Mateus')
         re = Usuario('Regina')
 
