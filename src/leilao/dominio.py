@@ -1,5 +1,4 @@
 import sys
-from unittest.runner import TextTestRunner
 
 class Usuario:
 
