@@ -1,5 +1,5 @@
 from unittest import TestCase
-from leilao.dominio import Usuario, Lance, Leilao
+from src.leilao.dominio import Usuario, Lance, Leilao
 
 
 class TestLeilao(TestCase):
@@ -58,9 +58,9 @@ class TestLeilao(TestCase):
         lance_futuro = Lance(futuro, 200.00)
         lance_re = Lance(re, 150.00)
 
-        self.leilao.propoe(lance_futuro)
-        self.leilao.propoe(lance_re)
         self.leilao.propoe(self.lance_mat)
+        self.leilao.propoe(lance_re)
+        self.leilao.propoe(lance_futuro)
 
         min_esperado = 100.00
         max_esperado = 200.00
