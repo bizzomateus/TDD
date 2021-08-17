@@ -5,7 +5,7 @@ class Usuario:
     def __init__(self, nome, carteira):
         self.__nome = nome
         self.__carteira = carteira
-        
+
     @property
     def nome(self):
         return self.__nome
@@ -40,12 +40,12 @@ class Leilao:
         self.__lances = []
 
     def propoe(self, lance: Lance):
-        if not self.__lances or self.__lances[-1].usuario != lance.usuario and \
-                lance.valor > self.__lances[-1].valor:
-            if lance.valor < self.menor_lance:
+        if self.lance_valido(lance):
+            if not self._tem_lances():
                 self.menor_lance = lance.valor
-            if lance.valor > self.maior_lance:
-                self.maior_lance = lance.valor
+
+            self.maior_lance = lance.valor
+
             self.__lances.append(lance)
         else:
             raise ValueError('Erro ao propor lance')
@@ -53,3 +53,16 @@ class Leilao:
     @property
     def lances(self):
         return self.__lances[:]
+
+    def lance_valido(self, lance):
+        return not self._tem_lances() or self._usuarios_diferentes(lance) and \
+            self._valor_maior_que_lance_anterior(lance)
+
+    def _tem_lances(self):
+        return self.__lances
+
+    def _usuarios_diferentes(self, lance):
+        return self.__lances[-1].usuario != lance.usuario
+
+    def _valor_maior_que_lance_anterior(self, lance):
+        return lance.valor > self.__lances[-1].valor
