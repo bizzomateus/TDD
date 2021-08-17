@@ -5,7 +5,7 @@ from src.leilao.dominio import Usuario, Lance, Leilao
 class TestLeilao(TestCase):
 
     def setUp(self):
-        self.mat = Usuario('Mateus')
+        self.mat = Usuario('Mateus', 500)
         self.lance_mat = Lance(self.mat, 100.00)
         self.leilao = Leilao('Celular')
 
@@ -13,7 +13,7 @@ class TestLeilao(TestCase):
         '''
             deve avaliar lances adicionados em ordem crescente
         '''
-        re = Usuario('Regina')
+        re = Usuario('Regina', 500)
         lance_re = Lance(re, 150.00)
 
         self.leilao.propoe(self.lance_mat)
@@ -29,7 +29,7 @@ class TestLeilao(TestCase):
         '''
             deve avaliar lances adicionados em ordem decrescente
         '''
-        re = Usuario('Regina')
+        re = Usuario('Regina', 500)
         lance_re = Lance(re, 150.00)
 
         with self.assertRaises(ValueError):
@@ -52,8 +52,8 @@ class TestLeilao(TestCase):
         '''
             deve avaliar tres lances adicionados intercalados
         '''
-        futuro = Usuario('Futuro')
-        re = Usuario('Regina')
+        futuro = Usuario('Futuro', 500)
+        re = Usuario('Regina', 500)
 
         lance_futuro = Lance(futuro, 200.00)
         lance_re = Lance(re, 150.00)
@@ -77,7 +77,7 @@ class TestLeilao(TestCase):
 
 
     def test_permite_caso_ultimo_usuario_seja_diferente(self):
-        regina = Usuario('Regina')
+        regina = Usuario('Regina', 500)
         lance_regina = Lance(regina, 200.00)
 
         self.leilao.propoe(self.lance_mat)
