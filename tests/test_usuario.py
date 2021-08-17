@@ -1,3 +1,4 @@
+from src.leilao.excecoes import LanceInvalido
 from src.leilao.dominio import Leilao, Usuario
 
 import pytest
@@ -24,7 +25,7 @@ def test_permite_lance_quando_valor_igual_a_carteira(mateus, leilao):
 
 
 def test_nao_permite_lances_com_valor_maior_que_carteira(mateus, leilao):
-    with pytest.raises(ValueError):
+    with pytest.raises(LanceInvalido):
         mateus.propoe_lance(leilao, 300)
 
         assert mateus.carteira == 200
